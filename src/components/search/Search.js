@@ -10,9 +10,6 @@ const Search = () => {
     const [documents, setDocuments] = useState([])
 
     const obradi = (data) => {
-        console.log(data)
-        console.log('------------------------------')
-        console.log(xmlToObject(data))
         const obj = xmlToObject(data)
         var docs = []
         for(let i in obj)
@@ -28,7 +25,6 @@ const Search = () => {
 
     const pretraga = () => {
         search(SearchValue).then(res => {
-                //setDocuments(xmlToObject(res.data))
                 obradi(res.data)
         }).catch(err => {
         })
@@ -57,9 +53,6 @@ const Search = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div>
-
-
-
                             <div className="padding-search">
                                 <h1>Pretraga Dokumenata</h1>
                                 <div className="form-group">
@@ -78,9 +71,6 @@ const Search = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div className="table-responsive">
                                 <table
                                     id="dataTable1"
