@@ -31,7 +31,7 @@ export const Vaccine = () => {
     });
   };
 
-  return (
+  return vakcine.length !== 0 ? (
     <div className="row d-flex justify-content-around">
       <div className="tabela-levo">
         <table
@@ -129,6 +129,8 @@ export const Vaccine = () => {
         </table>
       </div>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   );
 };
 
