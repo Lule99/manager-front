@@ -86,9 +86,6 @@ const Search = () => {
                                                     Tip dokumenta
                                                 </strong>
                                             </th>
-                                            <th>
-                                                <strong className="font-w600 wspace-no">Kreiran</strong>
-                                            </th>
                                             <th className="bg-none"></th>
                                             <th className="bg-none"></th>
                                         </tr>
