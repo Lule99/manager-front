@@ -10,7 +10,11 @@ export const dokumentaZaZahtev = (id) => {
 };
 
 export const prihvatiZahtev = (id) => {
-  return axios.post(`${SPRING_APP_URL}/api/zahtev/accept/${id}`);
+  return axios.get(`http://localhost:8082/api/zahtev/accept/${id}`, {
+    headers: {
+      Authorization: "",
+    },
+  });
 };
 
 export const odbijZahtev = (id, razlog) => {

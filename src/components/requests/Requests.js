@@ -22,7 +22,10 @@ export const Requests = () => {
 
   const pregledaj = (id, type) => {
     const link = document.createElement("a");
-    link.href = `http://localhost:8082/api/${type.toLowerCase()}/html/${id}`;
+    if (type == "SERTIFIKAT")
+      link.href = `http://localhost:8081/api/${type.toLowerCase()}/html/${id}`;
+    else
+      link.href = `http://localhost:8082/api/${type.toLowerCase()}/html/${id}`;
     link.target = "_blank";
     link.click();
     URL.revokeObjectURL(link.href);
@@ -30,7 +33,10 @@ export const Requests = () => {
 
   const skini = (id, type) => {
     const link = document.createElement("a");
-    link.href = `http://localhost:8082/api/${type.toLowerCase()}/pdf/${id}`;
+    if (type == "SERTIFIKAT")
+      link.href = `http://localhost:8081/api/${type.toLowerCase()}/pdf/${id}`;
+    else
+      link.href = `http://localhost:8082/api/${type.toLowerCase()}/pdf/${id}`;
     link.target = "_blank";
     link.click();
     URL.revokeObjectURL(link.href);
