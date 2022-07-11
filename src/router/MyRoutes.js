@@ -6,6 +6,7 @@ import Home from "../components/Home";
 import Requests from "../components/requests/Requests";
 import Report from "../components/report/Report";
 import Vaccine from "../components/vaccine/Vaccine";
+import Search from "../components/search/Search";
 
 const MyRoutes = () => {
   return (
@@ -61,6 +62,16 @@ const MyRoutes = () => {
         element={
           <ProtectedRoute
             component={<Vaccine />}
+            navigate={<Navigate to={"/login"} />}
+          />
+        }
+      />
+      <Route
+        exact
+        path="/search"
+        element={
+          <ProtectedRoute
+            component={<Search />}
             navigate={<Navigate to={"/login"} />}
           />
         }
