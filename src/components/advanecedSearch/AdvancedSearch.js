@@ -11,6 +11,7 @@ export const AdvancedSearch = () => {
   const pretraga = () => {
     advancedSearch(type, query).then((res) => {
       if (xmlToObject(res.data)) setDocuments(xmlToObject(res.data).DOKUMENT);
+      else setDocuments([]);
     });
   };
 
