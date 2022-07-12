@@ -7,6 +7,6 @@ export const search = (val) => {
 
 export const advancedSearch = (type, query) => {
   return axios.get(
-    `${SPRING_APP_URL}/api/metadata-search?type=${type}&query=${query}`
+    `${SPRING_APP_URL}/api/metadata-search?type=${type}&query=${encodeURIComponent(query)}`
   );
 };
