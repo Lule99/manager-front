@@ -1,0 +1,30 @@
+.search-main-container {
+    justify-content: center;
+    padding: 1rem;
+}
+
+.mycol {
+    padding: 1rem;
+}
+
+.myrow-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-shrink {
+    max-width: 20%;
+}
+
+.padding-search {
+    padding: 1rem;
+}
+
+select {
+    width: 10rem !important;
+}
+
+input {
+    max-width: 70%;
+}

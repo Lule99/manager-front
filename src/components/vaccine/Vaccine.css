@@ -1,0 +1,16 @@
+.tabela-levo {
+    width: 48vw;
+    margin-top: 2rem;
+    max-height: 85vh !important;
+    overflow: auto;
+    box-shadow: 3px 3px 5px rgb(159, 159, 159)
+}
+
+.aktivno td {
+    background-color: rgb(162, 162, 162) !important;
+}
+
+table.dataTable .aktivno tbody tr,
+table.dataTable .aktivno tbody td {
+    background-color: rgb(162, 162, 162) !important;
+}
