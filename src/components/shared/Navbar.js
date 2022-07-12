@@ -33,6 +33,11 @@ const Navbar = () => {
                 Pretraga
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/advanced-search">
+                Napredna pretraga
+              </Link>
+            </li>
             <li className="nav-item" onClick={logout}>
               <div className="nav-link">Odjava</div>
             </li>

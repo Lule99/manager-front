@@ -1,32 +1,17 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { useState } from "react";
 import { xmlToObject } from "../../helpers/XmlToJsConverter";
-import { search } from "../../services/searchService";
-import "./search.css";
+import { advancedSearch } from "../../services/searchService";
+import "./AdvancedSearch.css";
 
-const Search = () => {
-  const [SearchValue, setSearchValue] = useState("");
+export const AdvancedSearch = () => {
+  const [query, setQuery] = useState("");
+  const [type, setType] = useState("INTERESOVANJE");
   const [documents, setDocuments] = useState([]);
 
-  const obradi = (data) => {
-    const obj = xmlToObject(data);
-    var docs = [];
-    for (let i in obj)
-      if (obj[i] && obj[i].length && obj[i][0]) {
-        obj[i][0]["DOCUMENTID"].forEach((id) => {
-          docs.push({ ID: id, TIPDOKUMENTA: i });
-        });
-      }
-    console.log(docs);
-    setDocuments(docs);
-  };
-
   const pretraga = () => {
-    search(SearchValue)
-      .then((res) => {
-        obradi(res.data);
-      })
-      .catch((err) => {});
+    advancedSearch(type, query).then((res) => {
+      if (xmlToObject(res.data)) setDocuments(xmlToObject(res.data).DOKUMENT);
+    });
   };
 
   const pregledaj = (id, type) => {
@@ -51,6 +36,15 @@ const Search = () => {
     URL.revokeObjectURL(link.href);
   };
 
+  const extract = (tip, vrsta, id) => {
+    const link = document.createElement("a");
+    link.href = `http://localhost:8081/api/metadata?tip=${tip}&vrsta=${vrsta}&id=${id}`;
+    link.target = "_blank";
+    link.download(`${id}.${vrsta.toLowerCase()}`);
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
+
   return (
     <>
       <div className="content-body">
@@ -58,19 +52,29 @@ const Search = () => {
           <div className="row">
             <div>
               <div className="padding-search">
-                <h1>Pretraga Dokumenata</h1>
+                <h1>Napredna Pretraga Dokumenata</h1>
                 <div className="form-group">
                   <label>
                     <strong>Sadržaj</strong>
                   </label>
-                  <div className="row myrow-search">
+                  <div className="d-flex row justify-content-between">
+                    <select
+                      className="form-control"
+                      onChange={(e) => setType(e.target.value)}
+                    >
+                      <option value={"INTERESOVANJE"}>Interesovanja</option>
+                      <option value={"SAGLASNOST"}>Saglasnosti</option>
+                      <option value={"POTVRDA"}>Potvrde</option>
+                      <option value={"ZAHTEV"}>Zahtevi</option>
+                      <option value={"Sertifikati"}>Sertifikati</option>
+                    </select>
                     <input
                       type="text"
-                      class="form-control shrink"
-                      onChange={(e) => setSearchValue(e.target.value)}
+                      class="form-control"
+                      onChange={(e) => setQuery(e.target.value)}
                     />
                     <button
-                      className="btn btn-primary btn-shrink"
+                      className="btn btn-primary"
                       onClick={() => pretraga()}
                     >
                       Pretraga
@@ -93,6 +97,8 @@ const Search = () => {
                           Tip dokumenta
                         </strong>
                       </th>
+                      <th className="bg-none"></th>
+                      <th className="bg-none"></th>
                       <th className="bg-none"></th>
                       <th className="bg-none"></th>
                     </tr>
@@ -121,6 +127,26 @@ const Search = () => {
                               Skini
                             </button>
                           </td>
+                          <td>
+                            <button
+                              class="btn btn-outline-primary"
+                              onClick={() =>
+                                extract(doc.TIPDOKUMENTA, "RDF", doc.ID)
+                              }
+                            >
+                              Izvezi RDF
+                            </button>
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-outline-primary"
+                              onClick={() =>
+                                extract(doc.TIPDOKUMENTA, "JSON", doc.ID)
+                              }
+                            >
+                              Izvezi JSON
+                            </button>
+                          </td>
                         </tr>
                       );
                     })}
@@ -135,4 +161,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default AdvancedSearch;
