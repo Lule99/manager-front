@@ -16,11 +16,12 @@ export const AdvancedSearch = () => {
   };
 
   const pregledaj = (id, type) => {
+    console.log(type);
     const link = document.createElement("a");
     if (type == "SERTIFIKAT")
-      link.href = `http://localhost:8081/api/${type.toLowerCase()}/html/${id}`;
+      link.href = `http://localhost:8081/api/${type[0].toLowerCase()}/html/${id}`;
     else
-      link.href = `http://localhost:8082/api/${type.toLowerCase()}/html/${id}`;
+      link.href = `http://localhost:8082/api/${type[0].toLowerCase()}/html/${id}`;
     link.target = "_blank";
     link.click();
     URL.revokeObjectURL(link.href);
@@ -29,9 +30,9 @@ export const AdvancedSearch = () => {
   const skini = (id, type) => {
     const link = document.createElement("a");
     if (type == "SERTIFIKAT")
-      link.href = `http://localhost:8081/api/${type.toLowerCase()}/pdf/${id}`;
+      link.href = `http://localhost:8081/api/${type[0].toLowerCase()}/pdf/${id}`;
     else
-      link.href = `http://localhost:8082/api/${type.toLowerCase()}/pdf/${id}`;
+      link.href = `http://localhost:8082/api/${type[0].toLowerCase()}/pdf/${id}`;
     link.target = "_blank";
     link.click();
     URL.revokeObjectURL(link.href);
